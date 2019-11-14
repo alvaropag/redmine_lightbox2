@@ -1,6 +1,7 @@
 require 'redmine'
 
 require_dependency 'patches/attachments_patch'
+require_dependency 'patches/attachments_model_patch'
 require_dependency 'hooks/view_layouts_base_html_head_hook'
 
 Redmine::Plugin.register :redmine_lightbox2 do
@@ -11,6 +12,10 @@ Redmine::Plugin.register :redmine_lightbox2 do
   url 'https://github.com/paginagmbh/redmine_lightbox2'
   author_url 'https://github.com/tofi86'
   requires_redmine :version_or_higher => '4.0'
+
+  project_module :redmine_lightbox2 do
+    permission :view_restricted_files, attachments: %i[toggle_restricted]
+  end
 end
 
 

@@ -8,5 +8,6 @@ else
   #Redmine 2.x
   RedmineApp::Application.routes.draw do
     get 'attachments/download_inline/:id/:filename', :controller => 'attachments', :action => 'download_inline', :id => /\d+/, :filename => /.*/
+    post 'attachments/toggle_restricted/:id', :controller => 'attachments', :action => 'toggle_restricted', :id => /\d+/
   end
 end

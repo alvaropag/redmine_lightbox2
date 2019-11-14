@@ -15,6 +15,12 @@ module RedmineLightbox2
                     :type => detect_content_type(@attachment),
                     :disposition => 'inline'
         end
+
+        def toggle_restricted
+          @attachment = Attachment.find(params[:id])
+          @attachment.toggle(:restricted)
+          @attachment.save
+        end
       end
     end
   end
