@@ -2,6 +2,7 @@ require 'redmine'
 
 require_dependency 'patches/attachments_patch'
 require_dependency 'patches/attachments_model_patch'
+require_dependency 'patches/journals_model_patch'
 require_dependency 'hooks/view_layouts_base_html_head_hook'
 
 Redmine::Plugin.register :redmine_lightbox2 do

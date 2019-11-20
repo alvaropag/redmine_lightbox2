@@ -21,6 +21,10 @@ module RedmineLightbox2
           @attachment.toggle(:restricted)
           @attachment.save
         end
+
+        def read_authorize
+          (@attachment.visible?) and (!@attachment.restricted or (@attachment.restricted and User.current.allowed_to_globally?({:controller => :attachments, :action => :toggle_restricted}))) ? true : deny_access
+        end
       end
     end
   end
