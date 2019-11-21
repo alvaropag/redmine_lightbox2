@@ -5,8 +5,12 @@ module JournalsModelPatch
   def visible_details(user=User.current)
     details.select do |detail|
       if detail.property == 'attachment'
-        att = Attachment.find(detail.prop_key)
-        !att.restricted or (att.restricted and User.current.allowed_to_globally?({:controller => :attachments, :action => :toggle_restricted}))
+        att = Attachment.find_by_id(detail.prop_key)
+        if(att)
+          !att.restricted or (att.restricted and User.current.allowed_to_globally?({:controller => :attachments, :action => :toggle_restricted}))
+        else
+          true
+        end
       elsif detail.property == 'cf'
         detail.custom_field && detail.custom_field.visible_by?(project, user)
       elsif detail.property == 'relation'
